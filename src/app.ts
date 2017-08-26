@@ -1,13 +1,13 @@
 /// <reference path="../typings/index.d.ts" />
 
-import * as express      from 'express';
-import * as morgan       from 'morgan';
+import * as express from 'express';
+import * as morgan from 'morgan';
 import * as cookieParser from 'cookie-parser';
-import * as bodyParser   from 'body-parser';
-import * as path         from 'path';
-import * as mongoose     from 'mongoose';
+import * as bodyParser from 'body-parser';
+import * as path from 'path';
+import * as mongoose from 'mongoose';
 
-// import todoRouter from './modules/todo/todoRoute';
+import todoRouter from './routes/todo';
 import errorRouter from './routes/error';
 
 //server configuration
@@ -31,11 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //custom mounted middleware for routing
-// app.use('/api/v1/todo', todoRouter);
+app.use('/api/v1', [todoRouter]);
 
 // render index page
-app.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express REST API Application ' });
+app.get('/', function (req, res, next) {
+	res.send('Express REST API Application is running!');
 });
 
 //custom middleware for errors
