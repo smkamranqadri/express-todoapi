@@ -1,11 +1,13 @@
 /// <reference path="../../typings/index.d.ts" />
 
 import * as express from "express";
-import { todos, createTodo, updateTodo, removeTodo } from '../controllers/todo';
+import { todos, todo, createTodo, updateTodo, removeTodo } from '../controllers/todo';
 
 var router: express.Router = express.Router();
 
 router.get('/todo', todos);
+
+router.get('/todo/:id', todo);
 
 router.post('/todo', createTodo);
 

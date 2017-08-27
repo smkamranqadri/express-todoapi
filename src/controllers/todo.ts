@@ -14,6 +14,16 @@ export function todos(req: express.Request, res: express.Response) {
 		});
 }
 
+export function todo(req: express.Request, res: express.Response) {
+	let todoId: string = req.params.id;
+	Todo.findById(todoId)
+		.exec((err: Error, todo: ITodo) => {
+			if (err) return res.send({ success: false, error: err, data: null });
+			if (!todo) return res.send({ success: false, error: 'No todo found!', data: null });
+			res.send({ success: true, error: null, data: todo });
+		});
+}
+
 export function createTodo(req: express.Request, res: express.Response) {
 	let newtodo: ITodo = req.body;
 	Todo.create(newtodo, (err: Error, todo: ITodo) => {
