@@ -7,15 +7,18 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as mongoose from 'mongoose';
 
+import config from './config';
+import authRouter from './routes/auth';
 import todoRouter from './routes/todo';
+import userRouter from './routes/user';
 import errorRouter from './routes/error';
+import { authenticate, isAdmin } from './middleware';
 
 //server configuration
 let app: express.Application = express();
-let mongoURI: string = process.env.MONGOLAB_URI || 'mongodb://localhost/todoApp';
 
 // establish db connection
-mongoose.connect(mongoURI);
+mongoose.connect(config.database);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +34,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //custom mounted middleware for routing
-app.use('/api/v1', [todoRouter]);
+app.use('/api/v1', authRouter);
+app.use('/api/v1', authenticate, todoRouter);
+app.use('/api/v1', authenticate, isAdmin, userRouter);
 
 // render index page
 app.get('/', function (req, res, next) {
