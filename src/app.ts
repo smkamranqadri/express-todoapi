@@ -12,7 +12,7 @@ import authRouter from './routes/auth';
 import todoRouter from './routes/todo';
 import userRouter from './routes/user';
 import errorRouter from './routes/error';
-import { authenticate, isAdmin } from './middleware';
+import { authenticate } from './middleware';
 
 //server configuration
 let app: express.Application = express();
@@ -35,8 +35,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //custom mounted middleware for routing
 app.use('/api/v1', authRouter);
-app.use('/api/v1', authenticate, todoRouter);
-app.use('/api/v1', authenticate, isAdmin, userRouter);
+app.use('/api/v1', authenticate);
+app.use('/api/v1', [userRouter, todoRouter]);
 
 // render index page
 app.get('/', function (req, res, next) {

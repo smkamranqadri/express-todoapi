@@ -11,7 +11,11 @@ let todoSchema: mongoose.Schema = new mongoose.Schema({
 		type: Boolean,
 		required: true,
 		default: false
-	}
+	},
+	createdBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	},
 }, { timestamps: true });
 
 export interface ITodo extends mongoose.Document {
