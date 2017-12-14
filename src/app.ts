@@ -6,6 +6,7 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as mongoose from 'mongoose';
+import * as cors from 'cors';
 
 import config from './config';
 import authRouter from './routes/auth';
@@ -32,6 +33,7 @@ app.use(morgan('dev'));
 app.use(cookieParser('expressWebpackTodoApi'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 //custom mounted middleware for routing
 app.use('/api/v1', authRouter);

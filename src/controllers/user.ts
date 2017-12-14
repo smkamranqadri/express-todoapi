@@ -6,7 +6,7 @@ import { User, IUser } from '../models/user';
 
 // User.create({ name: 'Admin', email: 'admin@express.todo', passwordHash: 'expresstodoadmin' });
 // User.create({ name: 'Anonymous', email: 'anonymous@express.todo', passwordHash: 'expresstodoanonymous' }).then(user => {
-// console.log('user', user)
+// 	console.log('user', user)
 // }).catch(err => {
 // 	console.log('user', err)
 // });

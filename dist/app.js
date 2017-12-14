@@ -7,6 +7,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var path = require("path");
 var mongoose = require("mongoose");
+var cors = require("cors");
 var config_1 = require("./config");
 var auth_1 = require("./routes/auth");
 var todo_1 = require("./routes/todo");
@@ -27,6 +28,7 @@ app.use(morgan('dev'));
 app.use(cookieParser('expressWebpackTodoApi'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 //custom mounted middleware for routing
 app.use('/api/v1', auth_1.default);
 app.use('/api/v1', middleware_1.authenticate);
